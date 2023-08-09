@@ -1,0 +1,71 @@
+                                                        #customer and supplier
+class hotel:                                            #create class hotel
+  def __init__(self,menu):
+    self.Menu=menu
+    self.bill=[]                                     
+  def show(self):  
+     print(*self.Menu)                                  #showing menu card to customer
+  def bill_list(self):
+    print("your bill amount is:")                 
+    print(sum(self.bill))                               #bill amount
+    print("thank you,come again")
+  def checking_dish(self,requested_dish):
+    if requested_dish in self.Menu:                     #checking if dish is available or not
+      print("your dish is available")
+      if  requested_dish=='idly':
+         self.bill.append(100)
+      elif  requested_dish=='dosa':
+         self.bill.append(150)
+      elif  requested_dish=='vada':
+         self.bill.append(70)
+      elif  requested_dish=='poori-1 set':
+         self.bill.append(200)
+      elif requested_dish=='coffee':
+        self.bill.append(60)
+      elif  requested_dish=='Gheeroast':
+         self.bill.append(240)
+      elif  requested_dish=='rotti-1 set':
+         self.bill.append(260)
+      elif  requested_dish=='paneer tikka':
+         self.bill.append(300)
+      return True
+    else:
+      print("ur dish is not available")
+      return False
+class customer:                                          #create class customer
+  def __init__(self):      
+    self.menulist=[]                                     #customers orders 
+  def add_dish(self,dish):
+    self.menulist.append(dish)
+  def show(self):
+    print(self.menulist)
+  def req_dish(self):
+    print("enter ur dish")                              #customer requesting a dish
+    self.dish=input()
+    return self.dish
+
+
+
+itc = hotel(["dosa","Gheeroast","idly","vada","coffee","poori-1 set","rotti-1 set","paneer tikka"])                                         #creates an Object itc based on class hotel
+ragul=customer()                                                                                                                            #creates an object ragul based on class  customer
+
+
+
+while True:
+  print("----------------")
+  print("Welcome to ITC")
+  print("1.These are the menu today","\n2.Tell ur orders,please","\n3.Total number of orders ","\n4.ur bill is:","\n0.thank you")            #step 1--Showing menu's to the customer
+  option=int(input())                                                                                                                        #step 2--Choosing option 
+  if option==1:
+    itc.show()
+  elif option==2:
+    requested_dish=ragul.req_dish()                                                                                                          #step 3--Customer proceeding order
+    status=itc.checking_dish(requested_dish)                                                                                                 #step 4--Checking the dish if available or not
+    if status==True:
+      ragul.add_dish(requested_dish)                                                                                                         #step 5--if available means added to customers list of bookings
+  elif option==3:
+    ragul.show()
+  elif option==0:
+    break
+  elif option==4:
+    itc.bill_list()
